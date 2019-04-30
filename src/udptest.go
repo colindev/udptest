@@ -32,7 +32,7 @@ func main() {
 	case "client":
 		client(net.ParseIP(ip), port)
 	default:
-		fmt.Printf("Unknown subcommand [%s]\n", subcmd)
+		fmt.Printf("Unknown subcommand [%s]\r\n", subcmd)
 		os.Exit(1)
 	}
 
@@ -57,7 +57,7 @@ func server(port int) {
 		}
 
 		go func(b []byte, addr *net.UDPAddr) {
-			fmt.Printf("receive [%s] from [%s]\n", string(b), addr)
+			fmt.Printf("receive [%s] from [%s]\r\n", string(b), addr)
 			_, err := conn.WriteTo(b, addr)
 			if err != nil {
 				fmt.Println(addr, err)
@@ -76,7 +76,7 @@ func client(ip net.IP, port int) {
 		os.Exit(1)
 	}
 	defer conn.Close()
-	fmt.Printf("conn from [%s] to [%s]\n", conn.LocalAddr(), conn.RemoteAddr())
+	fmt.Printf("conn from [%s] to [%s]\r\n", conn.LocalAddr(), conn.RemoteAddr())
 
 	buf := bufio.NewReader(os.Stdin)
 	for {
@@ -95,7 +95,7 @@ func client(ip net.IP, port int) {
 			return
 		}
 
-		fmt.Printf("receive [%s] from [%s]\n", receive, addr)
+		fmt.Printf("receive [%s] from [%s]\r\n", receive, addr)
 
 	}
 
